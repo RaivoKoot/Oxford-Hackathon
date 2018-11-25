@@ -1,0 +1,5 @@
+high
+average
+very high
+low
+very low
