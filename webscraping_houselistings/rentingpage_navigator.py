@@ -68,8 +68,12 @@ def requestBatchOfPropertydata():
 
     property_links = request_property_links(bedrooms, city, min_price, max_price, radius)
     #links = getAdLinks('4', 'sheffield', '300', '400', '1')
+    import ctypes
+    ctypes.windll.user32.MessageBoxW(0, "Links to unique property ads have been successfully retrieved from scraping the web", "1/5", 0)
 
     property_data = request_ordered_data(property_links)
+
+    ctypes.windll.user32.MessageBoxW(0, "Finished scraping property-details from each ad", "2/5", 0)
 
     return property_data
 

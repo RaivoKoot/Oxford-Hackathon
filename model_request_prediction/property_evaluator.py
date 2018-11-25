@@ -51,6 +51,8 @@ def getPropertyRating(image_urls):
 
 # iterates through list of properties and rates them
 def rate_properties(property_batch):
+    counter = 1
+    listings = len(property_batch)
     # iterate through every property to rate it
     for property in property_batch:
         # get properties images
@@ -59,6 +61,11 @@ def rate_properties(property_batch):
         # get rating based off of the images
         rating = getPropertyRating(property_images)
         property['rating'] = rating # add attribute rating
+
+        if(counter % 3 == 0):
+            percentage = (counter / listings) * 100
+            ctypes.windll.user32.MessageBoxW(0, "completed modelling "+str(percentage)+"% of properties", "Running Machine Learning Model", 0)
+        counter += 1
 
 # iterates through properties that have been rated
 # and returns the n properties with the best rating
@@ -88,8 +95,19 @@ sys.path.append('../webscraping_houselistings')
 from rentingpage_navigator import requestBatchOfPropertydata
 
 property_batch = requestBatchOfPropertydata()
+import ctypes
+ctypes.windll.user32.MessageBoxW(0, "batch of property-data collected", "3/4", 0)
+ctypes.windll.user32.MessageBoxW(0, "Model will now analyse, predict and rate properties.\nThis may take a few minutes", "3/4", 0)
 
 rate_properties(property_batch)
 top_properties = getTopProperties(10, property_batch)
 
-print(top_properties)
+ctypes.windll.user32.MessageBoxW(0, "Finished! Top Ten Houses found!", "Model Run Complete", 0)
+ctypes.windll.user32.MessageBoxW(0, "Go back to the java application and click \'display results\'", "Model Run Complete", 0)
+
+import json
+with open('top_houses.json', 'a') as the_file:
+    for property in top_properties[1]:
+        if(property is None):
+            break
+        the_file.write(json.dumps(property)+"\n\n")

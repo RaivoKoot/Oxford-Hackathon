@@ -3,6 +3,7 @@ package application;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import application.logic.ScriptHandler;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -38,8 +39,18 @@ public class UIController implements Initializable{
 		cmbMinPrice.setItems(FXCollections.observableArrayList("100", "200", "300", "350", "400", "500","600","700","800", "900", "1000","1250","1500","1750", "2000"));
 		cmbMaxPrice.setItems(FXCollections.observableArrayList("100", "200", "300", "350", "400", "500","600","700","800", "900", "1000","1250","1500","1750", "2000"));
 		cmbRadius.setItems(FXCollections.observableArrayList("0.25", "0.5", "1", "3", "5"));
+	}
+	
+	public void startScan() {
+		String bedrooms = cmbBedrooms.getValue();
+		String city = cmbCity.getValue();
+		String minPrice = cmbMinPrice.getValue();
+		String maxPrice = cmbMaxPrice.getValue();
+		String radius = cmbRadius.getValue();
 		
-
+		String arguments = bedrooms +" "+city+" "+minPrice+" "+maxPrice+" "+radius;
+		
+		ScriptHandler.runPythonScript("property_evaluator.py", arguments);
 	}
 	
 	

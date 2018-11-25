@@ -1,0 +1,1 @@
+start cmd /k "cd ../../model_request_prediction & python property_evaluator.py 4 sheffield 200 350 1"

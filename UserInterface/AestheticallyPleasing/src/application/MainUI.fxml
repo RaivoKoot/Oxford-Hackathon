@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -32,12 +33,15 @@
                         <Image url="@logo.jpg" />
                      </image>
                      <HBox.margin>
-                        <Insets bottom="10.0" left="10.0" top="10.0" />
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </HBox.margin>
+                     <effect>
+                        <ColorAdjust saturation="-1.0" />
+                     </effect>
                   </ImageView>
-                  <Label text="Housing Solutions" textFill="WHITE">
+                  <Label text="Intelligent Housing Solutions" textFill="WHITE">
                      <font>
-                        <Font size="100.0" />
+                        <Font size="84.0" />
                      </font></Label>
                </children>
                <effect>
@@ -159,7 +163,7 @@
                               <Insets top="20.0" />
                            </VBox.margin>
                            <children>
-                              <Button fx:id="btnSubmit" minHeight="30.0" minWidth="120.0" mnemonicParsing="false" text="Find Properties">
+                              <Button fx:id="btnSubmit" minHeight="30.0" minWidth="120.0" mnemonicParsing="false" onAction="#startScan" text="Find Properties">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
