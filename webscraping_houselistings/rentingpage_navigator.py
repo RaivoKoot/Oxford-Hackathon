@@ -24,7 +24,7 @@ def getNextPageUrl(url):
 
     return nextPageUrl
 
-def getAdLinks(bedrooms, city, min_price, max_price, radius):
+def request_property_links(bedrooms, city, min_price, max_price, radius):
     from rentingpage_listing_link_scraper import scrape_ad_links
     # iterations collect links from a rental seach on zoopla from
     # page one to the last that has no listing on it
@@ -45,20 +45,35 @@ def getAdLinks(bedrooms, city, min_price, max_price, radius):
 
     return ad_links
 
-def request_ad_links():
+def request_ordered_data(property_links):
+    from listing_info_scraper import getPropertyInformationDictionary
+
+    propertydata_list = []
+    for property_link in property_links:
+        property_data = getPropertyInformationDictionary(property_link)
+
+        propertydata_list.append(property_data)
+
+    return propertydata_list
+
+def requestBatchOfPropertydata():
     import sys
+
+    # get user defined arguments
     bedrooms = sys.argv[1]
     city = sys.argv[2]
     min_price = sys.argv[3]
     max_price = sys.argv[4]
     radius = sys.argv[5]
 
-    print(sys.argv)
-
-    links = getAdLinks(bedrooms, city, min_price, max_price, radius)
+    property_links = request_property_links(bedrooms, city, min_price, max_price, radius)
     #links = getAdLinks('4', 'sheffield', '300', '400', '1')
-    return links
 
+    property_data = request_ordered_data(property_links)
+
+    return property_data
+
+'''
 if __name__ == "__main__":
     links = request_ad_links()
 
@@ -67,3 +82,4 @@ if __name__ == "__main__":
     json_string = getListingInformationAsJson(links[0])
     file = open('listing_data.json', 'w')
     file.write(json_string)
+'''

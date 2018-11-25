@@ -26,7 +26,7 @@ def getContainers(page_soup):
 
 # returns information about one property listings as a JSON
 # attributes are title, address, price, image_urls
-def getListingInformationAsJson(url_extension):
+def getPropertyInformationDictionary(url_extension):
     BASE_URL = 'https://www.zoopla.co.uk'
     url = BASE_URL + url_extension
 
@@ -47,9 +47,9 @@ def getListingInformationAsJson(url_extension):
 
     # the information from the containers
     data = parseCleanData(containers[0],containers[1],containers[2],containers[3],)
-    data['listing_link'] = url # add listing url
+    data['property_url'] = url # add listing url
 
-    import json
-    json_string = json.dumps(data)
+    #import json
+    #json_string = json.dumps(data)
 
-    return json_string
+    return data
